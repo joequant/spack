@@ -780,7 +780,13 @@ class Llvm(CMakePackage, CudaPackage, LlvmDetection, CompilerPackage):
                     )
 
     def flag_handler(self, name, flags):
-        if name == "ldflags" and self.spec.satisfies("%intel"):
+        if name == "cxxflags":
+            flags.append(self.compiler.cxx11_flag)
+            # This prevents massive numbers of warnings
+            if self.spec.satisfies("%clang"):
+                flags.append("-Wno-gnu-line-marker")
+            return (None, flags, None)
+        elif name == "ldflags" and self.spec.satisfies("%intel"):
             flags.append("-shared-intel")
             return (None, flags, None)
         return (flags, None, None)
