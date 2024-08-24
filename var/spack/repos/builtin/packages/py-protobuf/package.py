@@ -83,7 +83,6 @@ class PyProtobuf(PythonPackage):
     for ver in list(range(0, 21)):
         depends_on(f"protobuf@3.{ver}", when=f"@3.{ver}+cpp")
 
-    conflicts("+cpp", when="^python@3.11:")
     conflicts("%gcc@14", when="@:4.24.3")
 
     @property
