@@ -15,7 +15,10 @@ class Protobuf(CMakePackage):
     maintainers("hyoklee")
 
     license("BSD-3-Clause")
-
+    version("5.27.3", sha256="3ce6ff6d51d0cd21ac017b2e60ae231a5058388c0377d638d87f29dea20f7981")
+    version("5.26.1", sha256="3754236f50b12d6b7acbc8a8b233a4324b576fa1f49c7098fb743b788ffade41")
+    version("4.25.3", sha256="1d6b8d9114cb5b33ce8711729893097a107d4fefff5423528eb1decb5451856c")
+    version("4.24.3", sha256="c428e2c5040d87db45de58056109ad087d804de5e0b55ecc2a595ab3a73f2b36")
     version("3.25.3", sha256="da82be8acc5347c7918ef806ebbb621b24988f7e1a19b32cd7fc73bc29b59186")
     version("3.24.3", sha256="2c23dee0bdbc36bd43ee457083f8f5560265d0815cc1c56033de3932843262fe")
     version("3.23.3", sha256="5e4b555f72a7e3f143a7aff7262292500bb02c49b174351684bb70fc7f2a6d33")
