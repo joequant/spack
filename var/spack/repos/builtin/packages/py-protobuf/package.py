@@ -65,7 +65,7 @@ class PyProtobuf(PythonPackage):
 
     depends_on("c", type="build")  # generated
 
-    variant("cpp", default=False, when="@:4.21", description="Enable the cpp implementation")
+    variant("cpp", default=False, description="Enable the cpp implementation")
 
     depends_on("python", type=("build", "link", "run"))
     depends_on("py-setuptools", type=("build", "run"))
