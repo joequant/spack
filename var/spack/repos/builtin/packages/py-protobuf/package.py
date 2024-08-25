@@ -97,6 +97,6 @@ class PyProtobuf(PythonPackage):
         protobuf_dir = self.spec["protobuf"].libs.directories[0]
         env.prepend_path("LIBRARY_PATH", protobuf_dir)
 
-    @when("+cpp")
+    @when("@:3.20.3+cpp")
     def install_options(self, spec, prefix):
         return ["--cpp_implementation"]
