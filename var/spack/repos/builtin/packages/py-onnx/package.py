@@ -46,6 +46,8 @@ class PyOnnx(PythonPackage):
     # requirements.txt
     depends_on("py-setuptools@64:", type="build")
     depends_on("py-setuptools", type="build")
+    depends_on("protobuf", type=("build", "run"), when="%gcc@14:")
+    depends_on("abseil-cpp", type=("build", "run"), when="%gcc@14:")
     depends_on("py-protobuf@3.20.2:", type=("build", "run"), when="@1.15:")
     depends_on("py-protobuf@3.20.2:3", type=("build", "run"), when="@1.13")
     depends_on("py-protobuf@3.12.2:3.20.1", type=("build", "run"), when="@1.12")
@@ -71,3 +73,6 @@ class PyOnnx(PythonPackage):
 
     # 'python_out' does not recognize dllexport_decl.
     patch("remove_dllexport_decl.patch", when="@:1.6.0")
+
+    def setup_build_environment(self, env):
+        env.set("CMAKE_ARGS", "-DONNX_USE_PROTOBUF_SHARED_LIBS=ON")
