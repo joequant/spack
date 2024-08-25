@@ -6,7 +6,6 @@
 
 from spack.package import *
 
-
 class PyOnnx(PythonPackage):
     """Open Neural Network Exchange (ONNX) is an open ecosystem that
     empowers AI developers to choose the right tools as their
@@ -75,4 +74,8 @@ class PyOnnx(PythonPackage):
     patch("remove_dllexport_decl.patch", when="@:1.6.0")
 
     def setup_build_environment(self, env):
-        env.set("CMAKE_ARGS", "-DONNX_USE_PROTOBUF_SHARED_LIBS=ON")
+        env.set(
+            "CMAKE_ARGS",
+            f"-DONNX_USE_PROTOBUF_SHARED_LIBS=ON -DCMAKE_CXX_FLAGS=-I{self.spec["abseil-cpp"].prefix}/include"
+        )
+ 
