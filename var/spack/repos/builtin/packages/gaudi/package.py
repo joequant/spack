@@ -69,6 +69,15 @@ class Gaudi(CMakePackage):
         sha256="41aa1587a3e59d49e0fa9659577073c091871c2eca1b8b237c177ab98fbacf3f",
         when="@:38.1",
     )
+    patch(
+        "fix-missing-fstream.patch",
+        when="@38.3",
+    )
+    patch(
+        "https://gitlab.cern.ch/gaudi/Gaudi/-/commit/af9aa33f151aa44d20f56756f5429d2e1b4b796b.diff",
+        sha256="38d1a65d24b9b20a43f5b473969d7bd4f13f317783b1ccc2a24e5fc74e9325cb",
+        when="@38.1:",
+    )
 
     # These dependencies are needed for a minimal Gaudi build
     depends_on("aida")
