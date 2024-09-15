@@ -90,7 +90,7 @@ class Dd4hep(CMakePackage):
         description="Enable debug build flag - adds extra info in"
         " some places in addtion to the debug build type",
     )
-
+    variant("relaxpyver", default=False, description="Relax python version")
     depends_on("cmake @3.12:", type="build")
     depends_on("cmake @3.14:", type="build", when="@1.26:")
     depends_on("boost @1.49:")
@@ -165,6 +165,7 @@ class Dd4hep(CMakePackage):
             self.define_from_variant("DD4HEP_USE_HEPMC3", "hepmc3"),
             self.define_from_variant("DD4HEP_USE_GEANT4_UNITS", "geant4units"),
             self.define_from_variant("DD4HEP_BUILD_DEBUG", "debug"),
+            self.define_from_variant("DD4HEP_RELAX_PYVER", "relaxpyver"),
             # DD4hep@1.26: with hepmc3@3.2.6: allows compressed hepmc3 files
             self.define(
                 "DD4HEP_HEPMC3_COMPRESSION_SUPPORT", self.spec.satisfies("@1.26: ^hepmc3@3.2.6:")
