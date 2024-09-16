@@ -1,0 +1,39 @@
+diff --git a/ngluon2/NAmp.cpp b/ngluon2/NAmp.cpp
+index a44fd58..2bc14fc 100644
+--- a/ngluon2/NAmp.cpp
++++ b/ngluon2/NAmp.cpp
+@@ -18,7 +18,7 @@ template <typename T> NAmp<T>::~NAmp() { clearNG(); }
+ template <typename T> void NAmp<T>::clearNG() {
+   for (unsigned i = 0; i < ngluons.size(); i++) {
+     if (ngluons[i]) {
+-      ngalloc.destroy(ngluons[i]);
++      alloc_traits::destroy(ngalloc, ngluons[i]);
+       ngalloc.deallocate(ngluons[i], 1);
+       ngluons[i] = 0;
+     }
+@@ -31,11 +31,11 @@ template <typename T> void NAmp<T>::initNG(const T scalefactor, unsigned pos) {
+     ngluons.resize(pos + 1);
+   }
+   if (ngluons[pos]) {
+-    ngalloc.destroy(ngluons[pos]);
++    alloc_traits::destroy(ngalloc, ngluons[pos]);
+   } else {
+     ngluons[pos] = ngalloc.allocate(1);
+   }
+-  ngalloc.construct(ngluons[pos], NGluon2<T>(scalefactor));
++  alloc_traits::construct(ngalloc, ngluons[pos], NGluon2<T>(scalefactor));
+ }
+ 
+ template <typename T> void NAmp<T>::setMuR2(const T rscale) {
+diff --git a/ngluon2/NAmp.h b/ngluon2/NAmp.h
+index bd3e059..1412647 100644
+--- a/ngluon2/NAmp.h
++++ b/ngluon2/NAmp.h
+@@ -67,6 +67,7 @@ protected:
+ 
+   std::vector<NGluon2<T> *> ngluons;
+   std::allocator<NGluon2<T>> ngalloc;
++  typedef typename std::allocator_traits<std::allocator<NGluon2<T> > > alloc_traits;
+ };
+ 
+ #endif /* NGLUON2_NAMP_H */
